@@ -21,7 +21,7 @@ document.addEventListener("keydown", function(event) {
     if (document.activeElement !== guessHolder) {
         guessHolder.focus();
     }
-    if (event.key === "Enter") {checkLetter();}
+    if (event.key === "Enter" && guessHolder.disabled !== true) {checkLetter();}
 });
 
 
@@ -44,8 +44,8 @@ function checkLetter() {
         // ingeting sker
     } else if (!checkWord.includes(input)) { // possibly cycle through images with lives.
         lives -= 1;
-        if (lives < 0) {guessHolder.disabled = true; return;}
         image.src = `Billeder/${8 - lives}.jpg`;
+        if (lives == 0) {guessHolder.disabled = true; return;}
         const newWord = document.createElement("span");
         newWord.classList.add("wrongWord");
         newWord.textContent = input;
